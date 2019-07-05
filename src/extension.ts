@@ -64,7 +64,13 @@ function getMaximize(cmd: string): string {
 }
 
 function getTig(cmdTig: string): string {
-    cmdTig += "\""+ getSettings('executable') +"\"";
+    let executable = getSettings('executable');
+    if (os_1.platform() === 'darwin') {
+        cmdTig += " \\\"" + executable + "\\\"";
+    }
+    else {
+        cmdTig += " \"" + executable + "\"";
+    }
     return cmdTig;
 }
 
